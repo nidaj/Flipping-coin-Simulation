@@ -5,6 +5,8 @@ h=0
 t=0
 diff=0
 flag=0
+#read -p "Enter number of times u wnat to flip the coin: " n
+#for (( f=1; f<=n; f++ ))
 while (( $diff < 2 ))
 do
 	flip=$((RANDOM%2))
@@ -22,19 +24,16 @@ do
 			continue
 		fi
 	fi
-	if (( $h >= 21 | $t >= 21))
+	diff=$(($h-$t))
+	if (( $diff < 0 ))
 	then
-		diff=$(($h-$t))
-		if (( $diff < 0 ))
-		then
-			diff=`expr $diff \* -1`
-			flag=1
-		fi
+		$diff=$(( $diff \* -1))
+		flag=1
 	fi
 done
 if (( $flag==1 ))
 then
-	echo "Tail wins $t times and Head looses $h times with difference of: "$diff 
+	echo "Tail wins: "$diff "times"
 else
-	echo "Head wins $h times and Tail looses $t times with difference of: "$diff 
+	echo "Head wins: "$diff "times"
 fi
